@@ -9,6 +9,7 @@
           <component
             :is="contenidoModal"
             v-bind="datosModal"
+            @resultado-modal="finalizarModal"
           ></component>
         </v-card>
       </v-dialog>
@@ -45,16 +46,16 @@
 </template>
 
 <script>
-import  SeleccionadorRutas from '../cotizador/SeleccionadorRutas.vue'
-
+//import axios from "axios";
+import SeleccionadorRutas from "../cotizador/SeleccionadorRutas.vue";
 
 export default {
   components: {
-    SeleccionadorRutas
+    SeleccionadorRutas,
   },
   data: () => ({
     dialog: false,
-    contenidoModal: 'seleccionador-rutas', 
+    contenidoModal: "seleccionador-rutas",
     datosModal: {},
     datos: [
       {
@@ -68,16 +69,28 @@ export default {
     ],
   }),
   methods: {
-    abrirModal(datos) {  
-        console.log(datos) 
-        /* if (datos.idElemento >= 0) {
+    abrirModal(datos) {
+      console.log(datos);
+      /* if (datos.idElemento >= 0) {
           this.datosModal = { id: datos.idElemento };
         } else {
           this.datosModal = {  };
         } */
-          
-        this.dialog = true;
-      },
-  }
+
+      this.dialog = true;
+    },
+    finalizarModal(datos) {
+      if (!datos || datos.cerrarModal) {
+        this.dialog = false;
+      }
+    },
+  },
+  mounted() {
+    /* axios
+      .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+      .then((response) => {
+        alert(response);
+      }); */
+  }  
 };
 </script>

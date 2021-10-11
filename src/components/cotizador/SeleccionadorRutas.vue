@@ -1,10 +1,7 @@
 <template>
   <v-container class="d-flex flex-column justify-center">
     <div class="d-sm-flex flex-row-reverse justify-space-between">
-      <v-btn
-        color="error"
-        dark
-      >
+      <v-btn color="error" dark @click="salir">
         Salir
       </v-btn>
       <h1>Asignar opción a cotización</h1>
@@ -27,6 +24,18 @@ export default {
   data: () => ({
     items: ["Foo", "Bar", "Fizz", "Buzz"],
   }),
+  methods: {
+    salir() {
+      this.resultadoModal();
+    },
+    resultadoModal() {
+      this.$emit("resultado-modal", {
+        //siempre debe ser kebab case para los emit
+        datos: {},
+        cerrarModal: true,
+      });
+    },
+  },
 };
 </script>
 
